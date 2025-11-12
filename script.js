@@ -221,6 +221,7 @@ function launchGame(gameId) {
             '3': 'memory-leak.html',
             '4': 'code-injection.html',
             '5': 'scavenger-hunt.html',
+            '6': 'sequence-lock.html',
             '8': 'firewall.html',
             // Add more games as they are implemented
         };

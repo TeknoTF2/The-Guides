@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEQUENCE_LOCK.EXE - Terminal Hacking Games</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="sequence-lock.css">
+</head>
+<body>
+    <div class="terminal-container">
+        <div class="scanlines"></div>
+        <div class="crt-flicker"></div>
+
+        <!-- Header -->
+        <div class="terminal-header">
+            <div class="header-text">&gt; SEQUENCE_LOCK.EXE</div>
+            <div class="header-subtitle">TUMBLER LOCK BYPASS v3.2</div>
+        </div>
+
+        <!-- Difficulty Selection Screen -->
+        <div id="difficulty-screen" class="screen active">
+            <div class="screen-title">SELECT LOCK COMPLEXITY</div>
+            <div class="difficulty-options">
+                <div class="difficulty-option" data-difficulty="low" tabindex="0">
+                    <div class="difficulty-name">[1] BASIC LOCK</div>
+                    <div class="difficulty-desc">Simple 3-tumbler mechanism</div>
+                    <div class="difficulty-stats">Tumblers: 3 // Time: 45s // Fade: 4s</div>
+                </div>
+                <div class="difficulty-option" data-difficulty="standard" tabindex="0">
+                    <div class="difficulty-name">[2] STANDARD LOCK</div>
+                    <div class="difficulty-desc">Moderate 4-tumbler system</div>
+                    <div class="difficulty-stats">Tumblers: 4 // Time: 60s // Fade: 3s</div>
+                </div>
+                <div class="difficulty-option" data-difficulty="high" tabindex="0">
+                    <div class="difficulty-name">[3] ADVANCED LOCK</div>
+                    <div class="difficulty-desc">Complex 5-tumbler array</div>
+                    <div class="difficulty-stats">Tumblers: 5 // Time: 75s // Fade: 2.5s</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="game-screen" class="screen">
+            <!-- HUD -->
+            <div class="game-hud">
+                <div class="hud-item">
+                    <span class="hud-label">LOCK TYPE:</span>
+                    <span class="hud-value" id="current-difficulty">BASIC</span>
+                </div>
+                <div class="hud-item">
+                    <span class="hud-label">TIMER:</span>
+                    <span class="hud-value" id="timer-display">45</span>
+                </div>
+            </div>
+
+            <!-- Checkmarks Display -->
+            <div class="checkmarks-container" id="checkmarks-container">
+                <div class="checkmarks-title">TUMBLER STATUS:</div>
+                <div class="checkmarks-list" id="checkmarks-list"></div>
+            </div>
+
+            <!-- Lock Container -->
+            <div class="lock-container" id="lock-container">
+                <div class="lock-marker"></div>
+                <div id="circles-container"></div>
+            </div>
+
+            <!-- Instructions -->
+            <div class="instructions">
+                <div>Click and drag to rotate tumblers</div>
+                <div class="warning">WARNING: Checkmarks fade over time!</div>
+            </div>
+
+            <!-- Controls -->
+            <div class="game-controls">
+                <button id="start-btn" class="game-btn">START BYPASS</button>
+                <button id="restart-btn" class="game-btn hidden">RESTART</button>
+            </div>
+
+            <!-- Message Display -->
+            <div class="message-display" id="message-display"></div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="results-screen" class="screen">
+            <div class="results-container">
+                <div class="results-status" id="results-status">LOCK BYPASSED</div>
+                <div class="results-score" id="results-score"></div>
+                <div class="results-message" id="results-message"></div>
+            </div>
+            <div class="results-controls">
+                <button id="retry-btn" class="game-btn">TRY AGAIN</button>
+                <button id="menu-btn" class="game-btn">RETURN TO MENU</button>
+            </div>
+        </div>
+
+        <!-- Back to Menu Button -->
+        <div class="back-button">
+            <button id="back-btn" class="game-btn back-btn">&lt; MAIN MENU</button>
+        </div>
+    </div>
+
+    <script src="sequence-lock.js"></script>
+</body>
+</html>
