@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUANTUM_DECRYPT.EXE</title>
+    <link rel="stylesheet" href="quantum-decrypt.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="terminal">
+        <div class="scanline"></div>
+        <div class="crt-flicker"></div>
+
+        <!-- Difficulty Selection Screen -->
+        <div id="difficulty-screen" class="screen active">
+            <div class="screen-title">QUANTUM_DECRYPT.EXE</div>
+            <div class="screen-subtitle">SELECT DECRYPTION ALGORITHM</div>
+            <div class="difficulty-options">
+                <div class="difficulty-option" data-difficulty="basic" tabindex="0">
+                    <div class="difficulty-name">[1] BASIC CIPHER</div>
+                    <div class="difficulty-stats">
+                        <div>COMPLEXITY: LOW</div>
+                        <div>MISTAKES ALLOWED: 5</div>
+                        <div>NUMBERS TO FIND: 8-10</div>
+                    </div>
+                </div>
+                <div class="difficulty-option" data-difficulty="standard" tabindex="1">
+                    <div class="difficulty-name">[2] STANDARD CIPHER</div>
+                    <div class="difficulty-stats">
+                        <div>COMPLEXITY: MEDIUM</div>
+                        <div>MISTAKES ALLOWED: 3</div>
+                        <div>NUMBERS TO FIND: 6-8</div>
+                    </div>
+                </div>
+                <div class="difficulty-option" data-difficulty="advanced" tabindex="2">
+                    <div class="difficulty-name">[3] ADVANCED CIPHER</div>
+                    <div class="difficulty-stats">
+                        <div>COMPLEXITY: HIGH</div>
+                        <div>MISTAKES ALLOWED: 2</div>
+                        <div>NUMBERS TO FIND: 5-7</div>
+                    </div>
+                </div>
+            </div>
+            <div class="back-option">[ESC] RETURN TO MAIN MENU</div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="game-screen" class="screen">
+            <div class="game-header">
+                <div class="header-title">QUANTUM_DECRYPT.EXE</div>
+                <div class="header-stats">
+                    <div class="stat">
+                        <span class="stat-label">ERRORS:</span>
+                        <span id="errors-display" class="stat-value">0/5</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">FOUND:</span>
+                        <span id="found-display" class="stat-value">0/10</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sequence-container">
+                <div class="sequence-label">KNOWN SEQUENCE VALUES:</div>
+                <div id="sequence-display" class="sequence-numbers">
+                    <div class="sequence-number">2</div>
+                    <div class="sequence-number">4</div>
+                    <div class="sequence-number">8</div>
+                    <div class="sequence-number">16</div>
+                </div>
+                <div class="sequence-instruction">SELECT ALL NUMBERS THAT FOLLOW THE SAME PATTERN</div>
+            </div>
+
+            <div id="number-grid" class="number-grid">
+                <!-- Numbers will be generated here -->
+            </div>
+
+            <div class="controls">
+                <button id="back-btn" class="control-btn">[ESC] ABORT</button>
+            </div>
+        </div>
+
+        <!-- Success Screen -->
+        <div id="success-screen" class="screen result-screen">
+            <div class="result-title success-text">DECRYPTION SUCCESSFUL</div>
+            <div class="result-message">ALL SEQUENCE VALUES IDENTIFIED</div>
+            <div class="result-stats">
+                <div class="result-stat">
+                    <span class="result-label">ACCURACY:</span>
+                    <span id="accuracy-display" class="result-value">100%</span>
+                </div>
+                <div class="result-stat">
+                    <span class="result-label">ERRORS:</span>
+                    <span id="final-errors-display" class="result-value">0</span>
+                </div>
+            </div>
+            <div class="result-options">
+                <button id="retry-success-btn" class="result-btn">[R] RETRY</button>
+                <button id="menu-success-btn" class="result-btn">[M] MAIN MENU</button>
+            </div>
+        </div>
+
+        <!-- Failure Screen -->
+        <div id="failure-screen" class="screen result-screen">
+            <div class="result-title failure-text">DECRYPTION FAILED</div>
+            <div id="failure-message" class="result-message">TOO MANY ERRORS - SYSTEM LOCKED</div>
+            <div class="result-stats">
+                <div class="result-stat">
+                    <span class="result-label">FOUND:</span>
+                    <span id="final-found-display" class="result-value">5/10</span>
+                </div>
+                <div class="result-stat">
+                    <span class="result-label">ERRORS:</span>
+                    <span id="final-errors-fail-display" class="result-value">5</span>
+                </div>
+            </div>
+            <div class="result-options">
+                <button id="retry-fail-btn" class="result-btn">[R] RETRY</button>
+                <button id="menu-fail-btn" class="result-btn">[M] MAIN MENU</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="quantum-decrypt.js"></script>
+</body>
+</html>

@@ -224,7 +224,7 @@ function launchGame(gameId) {
             '6': 'sequence-lock.html',
             '7': 'binary-exploit.html',
             '8': 'firewall.html',
-            // Add more games as they are implemented
+            '9': 'quantum-decrypt.html'
         };
 
         if (gamePages[gameId]) {
