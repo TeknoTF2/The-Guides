@@ -42,10 +42,11 @@ let currentLine = 0;
 let currentChar = 0;
 let bootTextElement;
 let bootupComplete = false;
+let bootupSkipped = false;
 
 // Type out boot sequence
 function typeBootText() {
-    if (currentLine >= bootSequence.length) {
+    if (bootupSkipped || currentLine >= bootSequence.length) {
         bootupComplete = true;
         return;
     }
@@ -75,6 +76,9 @@ function transitionToMenu() {
     const bootupScreen = document.getElementById('bootup-screen');
     const mainMenu = document.getElementById('main-menu');
 
+    // Mark bootup as seen for this session
+    sessionStorage.setItem('bootupSeen', 'true');
+
     // Add pixelate effect
     bootupScreen.classList.add('pixelate');
 
@@ -92,22 +96,24 @@ function transitionToMenu() {
     }, 1500);
 }
 
-// Handle key press during bootup
+// Handle key press during bootup - allow immediate skip
 function handleBootupKey(event) {
-    if (bootupComplete) {
-        document.removeEventListener('keydown', handleBootupKey);
-        document.removeEventListener('click', handleBootupClick);
-        transitionToMenu();
-    }
+    // Skip bootup immediately on any key press
+    bootupSkipped = true;
+    bootupComplete = true;
+    document.removeEventListener('keydown', handleBootupKey);
+    document.removeEventListener('click', handleBootupClick);
+    transitionToMenu();
 }
 
-// Handle click during bootup
+// Handle click during bootup - allow immediate skip
 function handleBootupClick() {
-    if (bootupComplete) {
-        document.removeEventListener('keydown', handleBootupKey);
-        document.removeEventListener('click', handleBootupClick);
-        transitionToMenu();
-    }
+    // Skip bootup immediately on click
+    bootupSkipped = true;
+    bootupComplete = true;
+    document.removeEventListener('keydown', handleBootupKey);
+    document.removeEventListener('click', handleBootupClick);
+    transitionToMenu();
 }
 
 // Initialize grid items
@@ -258,14 +264,28 @@ function addScreenFlicker() {
 document.addEventListener('DOMContentLoaded', function() {
     bootTextElement = document.getElementById('boot-text');
 
-    // Start boot sequence after short delay
-    setTimeout(() => {
-        typeBootText();
-    }, 500);
+    // Check if bootup has already been seen this session
+    const bootupSeen = sessionStorage.getItem('bootupSeen');
 
-    // Listen for key press or click to continue
-    document.addEventListener('keydown', handleBootupKey);
-    document.addEventListener('click', handleBootupClick);
+    if (bootupSeen === 'true') {
+        // Skip bootup entirely - go straight to menu
+        const bootupScreen = document.getElementById('bootup-screen');
+        const mainMenu = document.getElementById('main-menu');
+
+        bootupScreen.classList.add('hidden');
+        mainMenu.classList.remove('hidden');
+        mainMenu.classList.add('active');
+    } else {
+        // First visit - show bootup sequence
+        // Start boot sequence after short delay
+        setTimeout(() => {
+            typeBootText();
+        }, 500);
+
+        // Listen for key press or click to skip
+        document.addEventListener('keydown', handleBootupKey);
+        document.addEventListener('click', handleBootupClick);
+    }
 
     // Initialize grid when menu is shown
     initializeGrid();
