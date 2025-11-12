@@ -521,6 +521,32 @@ connection to ongoing investigation.`,
     ]
 };
 
+// Scenario metadata for selection screen
+const SCENARIO_INFO = {
+    low: [
+        { name: 'Personal Blog', desc: 'Social media post about daily life' },
+        { name: 'Twitter Thread', desc: 'Public job announcement' },
+        { name: 'Email Chain', desc: 'Family vacation planning' }
+    ],
+    standard: [
+        { name: 'Text Messages', desc: 'Private conversation thread' },
+        { name: 'Company Memo', desc: 'Internal security protocol update' },
+        { name: 'Forum Post', desc: 'Cryptocurrency wallet recovery story' }
+    ],
+    high: [
+        { name: 'System Logs', desc: 'Corrupted server access records' },
+        { name: 'Encrypted Chat', desc: 'Partial message recovery' },
+        { name: 'Investigation Notes', desc: 'Surveillance case file' }
+    ]
+};
+
+// Difficulty display names
+const DIFFICULTY_NAMES = {
+    low: 'LOW SECURITY',
+    standard: 'STANDARD SECURITY',
+    high: 'HIGH SECURITY'
+};
+
 // Game state
 let currentDifficulty = null;
 let currentScenario = null;
@@ -530,6 +556,7 @@ let totalQuestions = 0;
 
 // DOM elements
 const difficultyScreen = document.getElementById('difficulty-screen');
+const scenarioScreen = document.getElementById('scenario-screen');
 const documentScreen = document.getElementById('document-screen');
 const questionsScreen = document.getElementById('questions-screen');
 const resultsScreen = document.getElementById('results-screen');
@@ -553,6 +580,7 @@ const backBtn = document.getElementById('back-btn');
 // Initialize game
 function init() {
     setupDifficultySelection();
+    setupScenarioSelection();
     setupEventListeners();
 }
 
@@ -577,13 +605,58 @@ function setupDifficultySelection() {
     });
 }
 
-// Select difficulty and start game
+// Select difficulty and show scenario selection
 function selectDifficulty(difficulty) {
     currentDifficulty = difficulty;
 
-    // Randomly select a scenario from this difficulty
-    const scenarios = SCENARIOS[difficulty];
-    currentScenario = scenarios[Math.floor(Math.random() * scenarios.length)];
+    // Update scenario screen with difficulty info
+    const scenarioSubtitle = document.getElementById('scenario-subtitle');
+    scenarioSubtitle.textContent = DIFFICULTY_NAMES[difficulty];
+
+    // Populate scenario descriptions
+    const scenarioInfo = SCENARIO_INFO[difficulty];
+    scenarioInfo.forEach((info, index) => {
+        const descElement = document.getElementById(`scenario-desc-${index}`);
+        descElement.textContent = `${info.name} - ${info.desc}`;
+    });
+
+    // Show scenario screen
+    difficultyScreen.classList.remove('active');
+    scenarioScreen.classList.add('active');
+}
+
+// Setup scenario selection
+function setupScenarioSelection() {
+    const scenarioOptions = document.querySelectorAll('.scenario-option');
+
+    scenarioOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            const scenarioIndex = parseInt(this.getAttribute('data-scenario'));
+            selectScenario(scenarioIndex);
+        });
+
+        option.setAttribute('tabindex', '0');
+        option.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                const scenarioIndex = parseInt(this.getAttribute('data-scenario'));
+                selectScenario(scenarioIndex);
+            }
+        });
+    });
+
+    // Back to difficulty button
+    const backToDifficultyBtn = document.getElementById('back-to-difficulty-btn');
+    backToDifficultyBtn.addEventListener('click', function() {
+        scenarioScreen.classList.remove('active');
+        difficultyScreen.classList.add('active');
+    });
+}
+
+// Select scenario and load document
+function selectScenario(scenarioIndex) {
+    // Load the selected scenario
+    currentScenario = SCENARIOS[currentDifficulty][scenarioIndex];
 
     // Reset state
     currentQuestionIndex = 0;
@@ -591,7 +664,7 @@ function selectDifficulty(difficulty) {
     totalQuestions = currentScenario.questions.length;
 
     // Show document screen
-    difficultyScreen.classList.remove('active');
+    scenarioScreen.classList.remove('active');
     documentScreen.classList.add('active');
 
     // Load document
@@ -718,10 +791,10 @@ function showMessage(mainText, type = 'info', subText = '') {
     }
 }
 
-// Reset game
+// Reset game - go back to scenario selection
 function resetGame() {
     resultsScreen.classList.remove('active');
-    difficultyScreen.classList.add('active');
+    scenarioScreen.classList.add('active');
 }
 
 // Return to main menu
