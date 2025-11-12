@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TERMINAL // HACKING PROTOCOLS</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Bootup Screen -->
+    <div id="bootup-screen" class="active">
+        <div class="scanlines"></div>
+        <div class="terminal-content">
+            <div id="boot-text"></div>
+            <div class="cursor"></div>
+        </div>
+    </div>
+
+    <!-- Main Menu -->
+    <div id="main-menu" class="hidden">
+        <div class="scanlines"></div>
+        <div class="crt-effect"></div>
+
+        <div class="terminal-header">
+            <div class="header-text">
+                <span class="glitch" data-text="ROBCO INDUSTRIES UNIFIED OPERATING SYSTEM">ROBCO INDUSTRIES UNIFIED OPERATING SYSTEM</span>
+            </div>
+            <div class="system-info">
+                COPYRIGHT 2075-2077 ROBCO INDUSTRIES | -Server 1-
+            </div>
+        </div>
+
+        <div class="menu-container">
+            <div class="menu-title">
+                <span class="bracket">[</span> SELECT PROTOCOL <span class="bracket">]</span>
+            </div>
+
+            <div class="menu-grid">
+                <div class="grid-item" data-game="1">
+                    <div class="grid-number">01</div>
+                    <div class="grid-label">WORD_MATCH.EXE</div>
+                    <div class="grid-status">[READY]</div>
+                </div>
+                <div class="grid-item" data-game="2">
+                    <div class="grid-number">02</div>
+                    <div class="grid-label">PASSWORD_CRACK.EXE</div>
+                    <div class="grid-status">[READY]</div>
+                </div>
+                <div class="grid-item" data-game="3">
+                    <div class="grid-number">03</div>
+                    <div class="grid-label">MEMORY_TRACE.EXE</div>
+                    <div class="grid-status">[READY]</div>
+                </div>
+                <div class="grid-item" data-game="4">
+                    <div class="grid-number">04</div>
+                    <div class="grid-label">CIPHER_DECODE.EXE</div>
+                    <div class="grid-status">[READY]</div>
+                </div>
+                <div class="grid-item" data-game="5">
+                    <div class="grid-number">05</div>
+                    <div class="grid-label">NODE_BREACH.EXE</div>
+                    <div class="grid-status">[READY]</div>
+                </div>
+                <div class="grid-item" data-game="6">
+                    <div class="grid-number">06</div>
+                    <div class="grid-label">SEQUENCE_LOCK.EXE</div>
+                    <div class="grid-status">[READY]</div>
+                </div>
+                <div class="grid-item" data-game="7">
+                    <div class="grid-number">07</div>
+                    <div class="grid-label">BINARY_EXPLOIT.EXE</div>
+                    <div class="grid-status">[LOCKED]</div>
+                </div>
+                <div class="grid-item" data-game="8">
+                    <div class="grid-number">08</div>
+                    <div class="grid-label">FIREWALL_BREACH.EXE</div>
+                    <div class="grid-status">[LOCKED]</div>
+                </div>
+                <div class="grid-item" data-game="9">
+                    <div class="grid-number">09</div>
+                    <div class="grid-label">QUANTUM_DECRYPT.EXE</div>
+                    <div class="grid-status">[LOCKED]</div>
+                </div>
+            </div>
+
+            <div class="menu-footer">
+                <span class="footer-prompt">&gt;</span>
+                <span class="footer-text">USE MOUSE OR KEYBOARD TO SELECT PROTOCOL</span>
+                <span class="cursor-blink">_</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
