@@ -18,6 +18,11 @@ const bootSequence = [
     "PRESS ANY KEY TO CONTINUE..."
 ];
 
+// Ambient sound
+const ambientSound = new Audio('sounds/crt-hum.mp3');
+ambientSound.loop = true;
+ambientSound.volume = 0.3; // 30% volume - adjust as needed
+
 let currentLine = 0;
 let currentChar = 0;
 let bootTextElement;
@@ -80,6 +85,10 @@ function handleBootupKey(event) {
     bootupComplete = true;
     document.removeEventListener('keydown', handleBootupKey);
     document.removeEventListener('click', handleBootupClick);
+
+    // Ensure ambient sound starts (in case autoplay was blocked)
+    startAmbientSound();
+
     transitionToMenu();
 }
 
@@ -90,6 +99,10 @@ function handleBootupClick() {
     bootupComplete = true;
     document.removeEventListener('keydown', handleBootupKey);
     document.removeEventListener('click', handleBootupClick);
+
+    // Ensure ambient sound starts (in case autoplay was blocked)
+    startAmbientSound();
+
     transitionToMenu();
 }
 
@@ -237,9 +250,20 @@ function addScreenFlicker() {
     }, 100);
 }
 
+// Start ambient sound (handles browser autoplay restrictions)
+function startAmbientSound() {
+    ambientSound.play().catch(error => {
+        // Autoplay was prevented, will retry on first user interaction
+        console.log('Ambient sound autoplay prevented, waiting for user interaction');
+    });
+}
+
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', function() {
     bootTextElement = document.getElementById('boot-text');
+
+    // Try to start ambient sound immediately
+    startAmbientSound();
 
     // Always show bootup sequence - can be skipped instantly
     // Start boot sequence after short delay
