@@ -272,6 +272,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const bootupScreen = document.getElementById('bootup-screen');
         const mainMenu = document.getElementById('main-menu');
 
+        bootupScreen.classList.remove('active');
         bootupScreen.classList.add('hidden');
         mainMenu.classList.remove('hidden');
         mainMenu.classList.add('active');
