@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NODE REROUTE // PROTOCOL 05</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="node-reroute.css">
+</head>
+<body>
+    <div class="scanlines"></div>
+    <div class="crt-effect"></div>
+
+    <!-- Back Button -->
+    <a href="index.html" class="back-button" title="Return to Main Menu">
+        <span class="back-arrow">←</span> BACK
+    </a>
+
+    <!-- Game Container -->
+    <div class="game-container">
+        <!-- Terminal Header -->
+        <div class="terminal-header">
+            <div class="header-text">
+                <span class="glitch" data-text="NODE REROUTE PROTOCOL">NODE REROUTE PROTOCOL</span>
+            </div>
+            <div class="system-info">
+                DATA STREAM MANAGEMENT // NETWORK TOPOLOGY RECONFIGURATION
+            </div>
+        </div>
+
+        <!-- Difficulty Selection Screen -->
+        <div id="difficulty-screen" class="screen active">
+            <div class="screen-title">
+                <span class="bracket">[</span> SELECT NETWORK COMPLEXITY <span class="bracket">]</span>
+            </div>
+
+            <div class="difficulty-container">
+                <div class="difficulty-option" data-difficulty="low">
+                    <div class="difficulty-level">LOW COMPLEXITY</div>
+                    <div class="difficulty-specs">
+                        <div class="spec-line">GRID SIZE: 5x5</div>
+                        <div class="spec-line">TIME LIMIT: 120 SEC</div>
+                        <div class="spec-line">DEFECTIVE NODES: 2-3</div>
+                        <div class="spec-line">THREAT LEVEL: MINIMAL</div>
+                    </div>
+                    <div class="difficulty-status">[READY]</div>
+                </div>
+
+                <div class="difficulty-option" data-difficulty="standard">
+                    <div class="difficulty-level">STANDARD COMPLEXITY</div>
+                    <div class="difficulty-specs">
+                        <div class="spec-line">GRID SIZE: 7x7</div>
+                        <div class="spec-line">TIME LIMIT: 180 SEC</div>
+                        <div class="spec-line">DEFECTIVE NODES: 4-6</div>
+                        <div class="spec-line">THREAT LEVEL: MODERATE</div>
+                    </div>
+                    <div class="difficulty-status">[READY]</div>
+                </div>
+
+                <div class="difficulty-option" data-difficulty="high">
+                    <div class="difficulty-level">HIGH COMPLEXITY</div>
+                    <div class="difficulty-specs">
+                        <div class="spec-line">GRID SIZE: 9x9</div>
+                        <div class="spec-line">TIME LIMIT: 240 SEC</div>
+                        <div class="spec-line">DEFECTIVE NODES: 7-10</div>
+                        <div class="spec-line">THREAT LEVEL: EXTREME</div>
+                    </div>
+                    <div class="difficulty-status">[READY]</div>
+                </div>
+            </div>
+
+            <div class="screen-footer">
+                <span class="footer-prompt">&gt;</span>
+                <span class="footer-text">SELECT NETWORK COMPLEXITY TO BEGIN REROUTE</span>
+                <span class="cursor-blink">_</span>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="game-screen" class="screen">
+            <div class="game-hud">
+                <div class="hud-section">
+                    <div class="hud-label">COMPLEXITY:</div>
+                    <div id="current-difficulty" class="hud-value">---</div>
+                </div>
+                <div class="hud-section">
+                    <div class="hud-label">TIME REMAINING:</div>
+                    <div id="timer-display" class="hud-value hud-timer">---</div>
+                </div>
+                <div class="hud-section">
+                    <div class="hud-label">PUZZLE:</div>
+                    <div id="puzzle-number" class="hud-value">--- / 3</div>
+                </div>
+                <div class="hud-section">
+                    <div class="hud-label">STATUS:</div>
+                    <div id="game-status" class="hud-value">STANDBY</div>
+                </div>
+            </div>
+
+            <!-- Objective -->
+            <div class="objective-box">
+                <div class="objective-icon">↓</div>
+                <div class="objective-text">
+                    ROUTE DATA STREAM FROM <span class="highlight">SOURCE</span> TO <span class="highlight">DESTINATION</span>
+                </div>
+            </div>
+
+            <!-- Game Grid -->
+            <div class="grid-container">
+                <div id="game-grid" class="game-grid"></div>
+            </div>
+
+            <!-- Control Panel -->
+            <div class="control-panel">
+                <button id="start-btn" class="game-button start-btn">
+                    <span class="button-icon">&gt;&gt;</span>
+                    START REROUTE
+                    <span class="button-icon">&lt;&lt;</span>
+                </button>
+
+                <button id="verify-btn" class="game-button verify-btn hidden">
+                    <span class="button-icon">✓</span>
+                    VERIFY CONNECTION
+                </button>
+
+                <button id="next-btn" class="game-button next-btn hidden">
+                    <span class="button-icon">→</span>
+                    NEXT PUZZLE
+                </button>
+
+                <button id="restart-btn" class="game-button restart-btn hidden">
+                    <span class="button-icon">↻</span>
+                    RESTART
+                </button>
+            </div>
+
+            <!-- Instructions -->
+            <div class="instructions">
+                <div class="instruction-title">[ CONTROLS ]</div>
+                <div class="instruction-grid">
+                    <div class="instruction-item">
+                        <span class="key">CLICK</span>
+                        <span class="description">ROTATE NODE 90°</span>
+                    </div>
+                    <div class="instruction-item">
+                        <span class="key-icon success">◆</span>
+                        <span class="description">SOURCE NODE (TOP)</span>
+                    </div>
+                    <div class="instruction-item">
+                        <span class="key-icon success">◆</span>
+                        <span class="description">DESTINATION NODE (BOTTOM)</span>
+                    </div>
+                    <div class="instruction-item">
+                        <span class="key-icon danger">✖</span>
+                        <span class="description">DEFECTIVE (LOCKED)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Message Display -->
+            <div id="message-display" class="message-display"></div>
+        </div>
+    </div>
+
+    <script src="node-reroute.js"></script>
+</body>
+</html>
