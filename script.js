@@ -202,6 +202,7 @@ function launchGame(gameId) {
         // Map game IDs to their respective pages
         const gamePages = {
             '3': 'memory-leak.html',
+            '4': 'code-injection.html',
             '5': 'node-reroute.html',
             '8': 'firewall.html',
             // Add more games as they are implemented
