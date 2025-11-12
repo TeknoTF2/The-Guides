@@ -222,6 +222,7 @@ function launchGame(gameId) {
             '4': 'code-injection.html',
             '5': 'scavenger-hunt.html',
             '6': 'sequence-lock.html',
+            '7': 'binary-exploit.html',
             '8': 'firewall.html',
             // Add more games as they are implemented
         };
