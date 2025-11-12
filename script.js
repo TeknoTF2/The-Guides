@@ -18,10 +18,29 @@ const bootSequence = [
     "PRESS ANY KEY TO CONTINUE..."
 ];
 
-// Ambient sound
-const ambientSound = new Audio('sounds/crt-hum.mp3');
-ambientSound.loop = true;
-ambientSound.volume = 0.3; // 30% volume - adjust as needed
+// Ambient sound using Web Audio API for seamless looping
+let audioContext;
+let ambientBuffer;
+let ambientSource;
+let gainNode;
+
+async function loadAmbientSound() {
+    try {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+        // Create gain node for volume control
+        gainNode = audioContext.createGain();
+        gainNode.gain.value = 0.3; // 30% volume - adjust as needed
+        gainNode.connect(audioContext.destination);
+
+        // Load the audio file
+        const response = await fetch('sounds/crt-hum.mp3');
+        const arrayBuffer = await response.arrayBuffer();
+        ambientBuffer = await audioContext.decodeAudioData(arrayBuffer);
+    } catch (error) {
+        console.log('Could not load ambient sound:', error);
+    }
+}
 
 let currentLine = 0;
 let currentChar = 0;
@@ -252,15 +271,35 @@ function addScreenFlicker() {
 
 // Start ambient sound (handles browser autoplay restrictions)
 function startAmbientSound() {
-    ambientSound.play().catch(error => {
-        // Autoplay was prevented, will retry on first user interaction
-        console.log('Ambient sound autoplay prevented, waiting for user interaction');
-    });
+    if (!audioContext || !ambientBuffer) {
+        console.log('Ambient sound not loaded yet');
+        return;
+    }
+
+    // Resume audio context if suspended (autoplay policy)
+    if (audioContext.state === 'suspended') {
+        audioContext.resume();
+    }
+
+    // Don't create multiple sources
+    if (ambientSource) {
+        return;
+    }
+
+    // Create buffer source for seamless looping
+    ambientSource = audioContext.createBufferSource();
+    ambientSource.buffer = ambientBuffer;
+    ambientSource.loop = true;
+    ambientSource.connect(gainNode);
+    ambientSource.start(0);
 }
 
 // Initialize on page load
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
     bootTextElement = document.getElementById('boot-text');
+
+    // Load ambient sound
+    await loadAmbientSound();
 
     // Try to start ambient sound immediately
     startAmbientSound();
