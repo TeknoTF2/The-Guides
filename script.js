@@ -31,7 +31,7 @@ const bootSequence = [
     "> PASSWORD_CRACK.EXE... READY",
     "> MEMORY_TRACE.EXE... READY",
     "> CIPHER_DECODE.EXE... READY",
-    "> NODE_BREACH.EXE... READY",
+    "> SCAVENGER_HUNT.EXE... READY",
     "> SEQUENCE_LOCK.EXE... READY",
     "",
     "SYSTEM READY",
@@ -207,7 +207,7 @@ function launchGame(gameId) {
             '2': 'brute-force.html',
             '3': 'memory-leak.html',
             '4': 'code-injection.html',
-            '5': 'node-reroute.html',
+            '5': 'scavenger-hunt.html',
             '8': 'firewall.html',
             // Add more games as they are implemented
         };
