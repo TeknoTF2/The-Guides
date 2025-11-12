@@ -52,134 +52,134 @@ const DIFFICULTY_CONFIG = {
 // Premade puzzles (3 per difficulty)
 const PUZZLES = {
     low: [
-        // Puzzle 1
+        // Puzzle 1 - Simple path down with locked straight pieces
         {
             grid: [
                 [null, null, {type:'I',rot:0,locked:false}, null, null],
-                [null, {type:'L',rot:1,locked:false}, {type:'L',rot:2,locked:true}, null, null],
-                [{type:'L',rot:0,locked:false}, {type:'L',rot:3,locked:false}, {type:'I',rot:0,locked:false}, {type:'L',rot:1,locked:false}, {type:'L',rot:2,locked:false}],
-                [null, null, {type:'L',rot:0,locked:true}, {type:'L',rot:3,locked:false}, null],
+                [null, null, {type:'I',rot:0,locked:true}, null, null],
+                [null, null, {type:'I',rot:0,locked:false}, null, null],
+                [null, null, {type:'I',rot:0,locked:true}, null, null],
                 [null, null, {type:'I',rot:0,locked:false}, null, null]
             ],
             source: {x: 2, y: 0},
             destination: {x: 2, y: 4}
         },
-        // Puzzle 2
+        // Puzzle 2 - L-shaped path with locked corners
         {
             grid: [
                 [null, null, {type:'I',rot:0,locked:false}, null, null],
-                [null, {type:'L',rot:0,locked:false}, {type:'T',rot:2,locked:false}, {type:'L',rot:1,locked:true}, null],
-                [null, {type:'I',rot:1,locked:false}, null, {type:'I',rot:0,locked:false}, null],
-                [null, {type:'L',rot:3,locked:true}, {type:'I',rot:1,locked:false}, {type:'L',rot:2,locked:false}, null],
-                [null, null, {type:'I',rot:0,locked:false}, null, null]
-            ],
-            source: {x: 2, y: 0},
-            destination: {x: 2, y: 4}
-        },
-        // Puzzle 3
-        {
-            grid: [
-                [null, {type:'I',rot:0,locked:false}, null, null, null],
-                [{type:'L',rot:0,locked:false}, {type:'L',rot:2,locked:true}, null, {type:'L',rot:0,locked:false}, {type:'L',rot:1,locked:false}],
-                [{type:'I',rot:0,locked:false}, null, {type:'L',rot:0,locked:false}, {type:'L',rot:3,locked:false}, {type:'I',rot:0,locked:false}],
-                [{type:'L',rot:3,locked:false}, {type:'L',rot:1,locked:true}, {type:'L',rot:2,locked:false}, null, {type:'I',rot:0,locked:false}],
+                [null, null, {type:'L',rot:2,locked:false}, null, null],
+                [null, null, null, {type:'I',rot:1,locked:true}, {type:'L',rot:1,locked:false}],
+                [null, null, null, null, {type:'L',rot:2,locked:false}],
                 [null, null, null, null, {type:'I',rot:0,locked:false}]
             ],
-            source: {x: 1, y: 0},
+            source: {x: 2, y: 0},
+            destination: {x: 4, y: 4}
+        },
+        // Puzzle 3 - Zigzag with locked horizontals
+        {
+            grid: [
+                [{type:'I',rot:0,locked:false}, null, null, null, null],
+                [{type:'L',rot:2,locked:false}, null, null, null, null],
+                [null, {type:'I',rot:1,locked:true}, {type:'L',rot:1,locked:false}, null, null],
+                [null, null, {type:'L',rot:2,locked:false}, null, null],
+                [null, null, null, {type:'I',rot:1,locked:true}, {type:'I',rot:0,locked:false}]
+            ],
+            source: {x: 0, y: 0},
             destination: {x: 4, y: 4}
         }
     ],
     standard: [
-        // Puzzle 1
+        // Puzzle 1 - Straight down with side detours
         {
             grid: [
                 [null, null, null, {type:'I',rot:0,locked:false}, null, null, null],
-                [null, {type:'L',rot:0,locked:false}, {type:'L',rot:1,locked:false}, {type:'T',rot:2,locked:false}, {type:'L',rot:1,locked:true}, {type:'L',rot:2,locked:false}, null],
-                [null, {type:'I',rot:0,locked:false}, null, {type:'I',rot:0,locked:false}, null, {type:'I',rot:0,locked:false}, null],
-                [null, {type:'L',rot:3,locked:false}, {type:'I',rot:1,locked:true}, {type:'X',rot:0,locked:false}, {type:'I',rot:1,locked:false}, {type:'L',rot:2,locked:false}, null],
-                [null, null, null, {type:'I',rot:0,locked:false}, null, {type:'I',rot:0,locked:false}, null],
-                [null, null, null, {type:'L',rot:3,locked:true}, {type:'I',rot:1,locked:false}, {type:'L',rot:2,locked:false}, null],
-                [null, null, null, null, null, {type:'I',rot:0,locked:false}, null]
+                [null, null, null, {type:'I',rot:0,locked:true}, null, null, null],
+                [null, null, null, {type:'I',rot:0,locked:false}, null, null, null],
+                [null, {type:'I',rot:1,locked:true}, {type:'L',rot:1,locked:false}, {type:'L',rot:2,locked:false}, null, null, null],
+                [null, null, null, {type:'I',rot:0,locked:false}, null, null, null],
+                [null, null, null, {type:'I',rot:0,locked:true}, null, null, null],
+                [null, null, null, {type:'I',rot:0,locked:false}, null, null, null]
             ],
             source: {x: 3, y: 0},
-            destination: {x: 5, y: 6}
+            destination: {x: 3, y: 6}
         },
-        // Puzzle 2
+        // Puzzle 2 - Winding path
         {
             grid: [
                 [null, null, {type:'I',rot:0,locked:false}, null, null, null, null],
-                [null, {type:'L',rot:0,locked:false}, {type:'T',rot:1,locked:false}, {type:'L',rot:1,locked:false}, {type:'L',rot:2,locked:true}, null, null],
-                [{type:'L',rot:0,locked:false}, {type:'L',rot:3,locked:false}, null, {type:'L',rot:0,locked:false}, {type:'T',rot:2,locked:false}, {type:'L',rot:1,locked:false}, {type:'L',rot:2,locked:false}],
-                [{type:'I',rot:0,locked:false}, null, null, {type:'I',rot:0,locked:true}, null, null, {type:'I',rot:0,locked:false}],
-                [{type:'T',rot:0,locked:false}, {type:'I',rot:1,locked:false}, {type:'L',rot:1,locked:false}, {type:'L',rot:2,locked:false}, null, {type:'L',rot:3,locked:true}, {type:'L',rot:2,locked:false}],
-                [{type:'L',rot:3,locked:false}, {type:'L',rot:1,locked:false}, {type:'L',rot:2,locked:false}, null, null, null, null],
-                [null, null, {type:'I',rot:0,locked:false}, null, null, null, null]
-            ],
-            source: {x: 2, y: 0},
-            destination: {x: 2, y: 6}
-        },
-        // Puzzle 3
-        {
-            grid: [
-                [null, null, null, null, {type:'I',rot:0,locked:false}, null, null],
-                [null, {type:'L',rot:0,locked:false}, {type:'I',rot:1,locked:true}, {type:'L',rot:1,locked:false}, {type:'L',rot:2,locked:false}, null, null],
-                [{type:'L',rot:0,locked:false}, {type:'L',rot:3,locked:false}, null, null, {type:'L',rot:3,locked:false}, {type:'L',rot:1,locked:false}, {type:'L',rot:2,locked:false}],
-                [{type:'I',rot:0,locked:false}, null, {type:'L',rot:0,locked:false}, {type:'I',rot:1,locked:false}, {type:'L',rot:2,locked:true}, null, {type:'I',rot:0,locked:false}],
-                [{type:'T',rot:0,locked:false}, {type:'L',rot:1,locked:false}, {type:'T',rot:1,locked:false}, {type:'L',rot:1,locked:false}, {type:'L',rot:2,locked:false}, null, {type:'I',rot:0,locked:false}],
-                [{type:'L',rot:3,locked:true}, {type:'L',rot:1,locked:false}, {type:'L',rot:2,locked:false}, null, null, null, {type:'L',rot:3,locked:false}],
+                [null, null, {type:'L',rot:2,locked:false}, null, null, null, null],
+                [null, null, null, {type:'I',rot:1,locked:true}, {type:'L',rot:1,locked:false}, null, null],
+                [null, null, null, null, {type:'L',rot:2,locked:false}, null, null],
+                [null, null, null, null, null, {type:'I',rot:1,locked:true}, {type:'L',rot:1,locked:false}],
+                [null, null, null, null, null, null, {type:'L',rot:2,locked:false}],
                 [null, null, null, null, null, null, {type:'I',rot:0,locked:false}]
             ],
-            source: {x: 4, y: 0},
+            source: {x: 2, y: 0},
+            destination: {x: 6, y: 6}
+        },
+        // Puzzle 3 - Square spiral
+        {
+            grid: [
+                [{type:'I',rot:0,locked:false}, null, null, null, null, null, null],
+                [{type:'L',rot:2,locked:false}, null, null, null, null, null, null],
+                [null, {type:'L',rot:0,locked:false}, {type:'I',rot:1,locked:true}, {type:'I',rot:1,locked:false}, {type:'L',rot:1,locked:false}, null, null],
+                [null, {type:'I',rot:0,locked:false}, null, null, {type:'I',rot:0,locked:false}, null, null],
+                [null, {type:'L',rot:3,locked:false}, {type:'I',rot:1,locked:true}, {type:'I',rot:1,locked:false}, {type:'L',rot:2,locked:false}, null, null],
+                [null, null, null, null, null, {type:'I',rot:1,locked:false}, {type:'L',rot:1,locked:false}],
+                [null, null, null, null, null, null, {type:'I',rot:0,locked:false}]
+            ],
+            source: {x: 0, y: 0},
             destination: {x: 6, y: 6}
         }
     ],
     high: [
-        // Puzzle 1
+        // Puzzle 1 - Long straight with detours
         {
             grid: [
                 [null, null, null, null, {type:'I',rot:0,locked:false}, null, null, null, null],
-                [null, {type:'L',rot:0,locked:false}, {type:'I',rot:1,locked:false}, {type:'L',rot:1,locked:false}, {type:'T',rot:2,locked:false}, {type:'L',rot:1,locked:true}, {type:'L',rot:2,locked:false}, null, null],
-                [null, {type:'I',rot:0,locked:false}, null, null, {type:'L',rot:3,locked:false}, {type:'T',rot:1,locked:false}, {type:'L',rot:2,locked:false}, null, null],
-                [{type:'L',rot:0,locked:false}, {type:'L',rot:2,locked:true}, null, {type:'L',rot:0,locked:false}, {type:'I',rot:1,locked:false}, {type:'L',rot:2,locked:false}, null, {type:'L',rot:0,locked:false}, {type:'L',rot:1,locked:false}],
-                [{type:'I',rot:0,locked:false}, null, {type:'L',rot:0,locked:false}, {type:'T',rot:3,locked:false}, null, null, null, {type:'I',rot:0,locked:false}, {type:'I',rot:0,locked:false}],
-                [{type:'T',rot:0,locked:false}, {type:'I',rot:1,locked:true}, {type:'T',rot:1,locked:false}, {type:'T',rot:1,locked:false}, {type:'L',rot:1,locked:false}, {type:'L',rot:2,locked:false}, null, {type:'L',rot:3,locked:false}, {type:'L',rot:2,locked:false}],
-                [{type:'L',rot:3,locked:false}, {type:'L',rot:1,locked:false}, {type:'L',rot:2,locked:false}, null, null, null, {type:'L',rot:0,locked:true}, {type:'I',rot:1,locked:false}, null],
-                [null, null, null, null, null, null, {type:'L',rot:3,locked:false}, {type:'L',rot:1,locked:false}, {type:'L',rot:2,locked:false}],
-                [null, null, null, null, null, null, null, null, {type:'I',rot:0,locked:false}]
+                [null, null, null, null, {type:'I',rot:0,locked:true}, null, null, null, null],
+                [null, null, null, null, {type:'I',rot:0,locked:false}, null, null, null, null],
+                [null, {type:'I',rot:1,locked:true}, {type:'I',rot:1,locked:false}, {type:'L',rot:1,locked:false}, {type:'L',rot:2,locked:false}, null, null, null, null],
+                [null, null, null, null, {type:'I',rot:0,locked:false}, null, null, null, null],
+                [null, null, null, null, {type:'I',rot:0,locked:true}, null, null, null, null],
+                [null, null, null, null, {type:'I',rot:0,locked:false}, null, null, null, null],
+                [null, null, null, null, {type:'I',rot:0,locked:true}, null, null, null, null],
+                [null, null, null, null, {type:'I',rot:0,locked:false}, null, null, null, null]
             ],
             source: {x: 4, y: 0},
-            destination: {x: 8, y: 8}
+            destination: {x: 4, y: 8}
         },
-        // Puzzle 2
+        // Puzzle 2 - Diagonal staircase
         {
             grid: [
-                [null, null, {type:'I',rot:0,locked:false}, null, null, null, null, null, null],
-                [null, {type:'L',rot:0,locked:false}, {type:'T',rot:1,locked:false}, {type:'L',rot:1,locked:true}, {type:'L',rot:2,locked:false}, null, null, null, null],
-                [{type:'L',rot:0,locked:false}, {type:'L',rot:3,locked:false}, null, null, {type:'L',rot:3,locked:false}, {type:'I',rot:1,locked:false}, {type:'L',rot:1,locked:false}, {type:'L',rot:2,locked:false}, null],
-                [{type:'I',rot:0,locked:false}, null, {type:'L',rot:0,locked:false}, {type:'I',rot:1,locked:false}, {type:'T',rot:3,locked:false}, null, null, {type:'I',rot:0,locked:true}, null],
-                [{type:'T',rot:0,locked:false}, {type:'I',rot:1,locked:false}, {type:'T',rot:1,locked:false}, {type:'L',rot:1,locked:false}, {type:'T',rot:2,locked:false}, {type:'I',rot:1,locked:false}, {type:'L',rot:1,locked:false}, {type:'L',rot:2,locked:false}, null],
-                [{type:'L',rot:3,locked:true}, {type:'L',rot:1,locked:false}, {type:'L',rot:2,locked:false}, null, {type:'L',rot:3,locked:false}, {type:'L',rot:1,locked:false}, {type:'L',rot:2,locked:false}, null, null],
-                [null, null, null, null, null, null, {type:'L',rot:3,locked:false}, {type:'L',rot:1,locked:false}, {type:'L',rot:2,locked:false}],
-                [null, null, null, null, null, null, null, null, {type:'L',rot:3,locked:true}],
-                [null, null, null, null, null, null, null, null, {type:'I',rot:0,locked:false}]
+                [{type:'I',rot:0,locked:false}, null, null, null, null, null, null, null, null],
+                [{type:'L',rot:2,locked:false}, null, null, null, null, null, null, null, null],
+                [null, {type:'I',rot:1,locked:true}, {type:'L',rot:1,locked:false}, null, null, null, null, null, null],
+                [null, null, {type:'L',rot:2,locked:false}, null, null, null, null, null, null],
+                [null, null, null, {type:'I',rot:1,locked:true}, {type:'L',rot:1,locked:false}, null, null, null, null],
+                [null, null, null, null, {type:'L',rot:2,locked:false}, null, null, null, null],
+                [null, null, null, null, null, {type:'I',rot:1,locked:true}, {type:'L',rot:1,locked:false}, null, null],
+                [null, null, null, null, null, null, {type:'L',rot:2,locked:false}, null, null],
+                [null, null, null, null, null, null, null, {type:'I',rot:1,locked:true}, {type:'I',rot:0,locked:false}]
             ],
-            source: {x: 2, y: 0},
+            source: {x: 0, y: 0},
             destination: {x: 8, y: 8}
         },
-        // Puzzle 3
+        // Puzzle 3 - Large spiral
         {
             grid: [
-                [null, null, null, {type:'I',rot:0,locked:false}, null, null, null, null, null],
-                [null, null, {type:'L',rot:0,locked:false}, {type:'T',rot:1,locked:false}, {type:'L',rot:1,locked:false}, {type:'L',rot:2,locked:true}, null, null, null],
-                [null, {type:'L',rot:0,locked:false}, {type:'X',rot:0,locked:false}, null, null, {type:'L',rot:3,locked:false}, {type:'I',rot:1,locked:false}, {type:'L',rot:1,locked:false}, {type:'L',rot:2,locked:false}],
-                [{type:'L',rot:0,locked:false}, {type:'T',rot:1,locked:false}, {type:'L',rot:2,locked:false}, null, {type:'L',rot:0,locked:false}, {type:'L',rot:3,locked:false}, null, null, {type:'I',rot:0,locked:false}],
-                [{type:'I',rot:0,locked:true}, null, null, {type:'L',rot:0,locked:false}, {type:'X',rot:0,locked:false}, {type:'L',rot:1,locked:false}, {type:'L',rot:2,locked:false}, null, {type:'I',rot:0,locked:false}],
-                [{type:'T',rot:0,locked:false}, {type:'I',rot:1,locked:false}, {type:'L',rot:1,locked:true}, {type:'T',rot:1,locked:false}, {type:'T',rot:1,locked:false}, {type:'L',rot:2,locked:false}, null, null, {type:'L',rot:3,locked:false}],
-                [{type:'L',rot:3,locked:false}, {type:'L',rot:1,locked:false}, {type:'L',rot:2,locked:false}, null, null, null, null, null, {type:'L',rot:3,locked:false}],
-                [null, null, null, null, null, null, null, null, {type:'L',rot:3,locked:false}],
+                [{type:'I',rot:0,locked:false}, null, null, null, null, null, null, null, null],
+                [{type:'L',rot:2,locked:false}, null, null, null, null, null, null, null, null],
+                [null, {type:'L',rot:0,locked:false}, {type:'I',rot:1,locked:true}, {type:'I',rot:1,locked:false}, {type:'I',rot:1,locked:false}, {type:'L',rot:1,locked:false}, null, null, null],
+                [null, {type:'I',rot:0,locked:false}, null, null, null, {type:'I',rot:0,locked:false}, null, null, null],
+                [null, {type:'I',rot:0,locked:false}, null, null, null, {type:'I',rot:0,locked:false}, null, null, null],
+                [null, {type:'L',rot:3,locked:false}, {type:'I',rot:1,locked:true}, {type:'I',rot:1,locked:false}, {type:'I',rot:1,locked:false}, {type:'L',rot:2,locked:false}, null, null, null],
+                [null, null, null, null, null, null, {type:'I',rot:1,locked:true}, {type:'L',rot:1,locked:false}, null],
+                [null, null, null, null, null, null, null, {type:'L',rot:2,locked:false}, null],
                 [null, null, null, null, null, null, null, null, {type:'I',rot:0,locked:false}]
             ],
-            source: {x: 3, y: 0},
+            source: {x: 0, y: 0},
             destination: {x: 8, y: 8}
         }
     ]
