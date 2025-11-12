@@ -197,13 +197,22 @@ function launchGame(gameId) {
     const mainMenu = document.getElementById('main-menu');
     mainMenu.style.animation = 'pixelate-out 1s steps(10) forwards';
 
-    // In a real implementation, this would navigate to the game
+    // Navigate to game after transition
     setTimeout(() => {
-        // For now, just show an alert
-        alert(`Game ${gameId} would launch here!\n\nThis will be implemented in the next phase.`);
+        // Map game IDs to their respective pages
+        const gamePages = {
+            '3': 'memory-leak.html',
+            // Add more games as they are implemented
+        };
 
-        // Reset animation
-        mainMenu.style.animation = '';
+        if (gamePages[gameId]) {
+            // Navigate to the game page
+            window.location.href = gamePages[gameId];
+        } else {
+            // Game not yet implemented
+            alert(`Game ${gameId} is not yet implemented.\n\nCheck back soon!`);
+            mainMenu.style.animation = '';
+        }
     }, 1000);
 }
 
