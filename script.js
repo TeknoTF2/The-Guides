@@ -216,6 +216,7 @@ function launchGame(gameId) {
     setTimeout(() => {
         // Map game IDs to their respective pages
         const gamePages = {
+            '1': 'word-match.html',
             '2': 'brute-force.html',
             '3': 'memory-leak.html',
             '4': 'code-injection.html',
