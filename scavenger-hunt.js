@@ -1,5 +1,36 @@
 // Scavenger Hunt Game Logic
 
+// Ambient sound using Web Audio API for seamless looping
+let audioContext;
+let ambientBuffer;
+let ambientSource;
+let gainNode;
+
+async function loadAmbientSound() {
+    try {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        gainNode = audioContext.createGain();
+        gainNode.gain.value = 0.3;
+        gainNode.connect(audioContext.destination);
+        const response = await fetch('sounds/crt-hum.mp3');
+        const arrayBuffer = await response.arrayBuffer();
+        ambientBuffer = await audioContext.decodeAudioData(arrayBuffer);
+    } catch (error) {
+        console.log('Could not load ambient sound:', error);
+    }
+}
+
+function startAmbientSound() {
+    if (!audioContext || !ambientBuffer) return;
+    if (audioContext.state === 'suspended') audioContext.resume();
+    if (ambientSource) return;
+    ambientSource = audioContext.createBufferSource();
+    ambientSource.buffer = ambientBuffer;
+    ambientSource.loop = true;
+    ambientSource.connect(gainNode);
+    ambientSource.start(0);
+}
+
 // Scenario definitions
 const SCENARIOS = {
     low: [
@@ -818,7 +849,11 @@ function addRandomGlitches() {
 }
 
 // Initialize on page load
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
+    // Load and start ambient sound
+    await loadAmbientSound();
+    startAmbientSound();
+
     init();
     addRandomGlitches();
 });
