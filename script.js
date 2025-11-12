@@ -76,9 +76,6 @@ function transitionToMenu() {
     const bootupScreen = document.getElementById('bootup-screen');
     const mainMenu = document.getElementById('main-menu');
 
-    // Mark bootup as seen for this session
-    sessionStorage.setItem('bootupSeen', 'true');
-
     // Add pixelate effect
     bootupScreen.classList.add('pixelate');
 
@@ -264,29 +261,15 @@ function addScreenFlicker() {
 document.addEventListener('DOMContentLoaded', function() {
     bootTextElement = document.getElementById('boot-text');
 
-    // Check if bootup has already been seen this session
-    const bootupSeen = sessionStorage.getItem('bootupSeen');
+    // Always show bootup sequence - can be skipped instantly
+    // Start boot sequence after short delay
+    setTimeout(() => {
+        typeBootText();
+    }, 500);
 
-    if (bootupSeen === 'true') {
-        // Skip bootup entirely - go straight to menu
-        const bootupScreen = document.getElementById('bootup-screen');
-        const mainMenu = document.getElementById('main-menu');
-
-        bootupScreen.classList.remove('active');
-        bootupScreen.classList.add('hidden');
-        mainMenu.classList.remove('hidden');
-        mainMenu.classList.add('active');
-    } else {
-        // First visit - show bootup sequence
-        // Start boot sequence after short delay
-        setTimeout(() => {
-            typeBootText();
-        }, 500);
-
-        // Listen for key press or click to skip
-        document.addEventListener('keydown', handleBootupKey);
-        document.addEventListener('click', handleBootupClick);
-    }
+    // Listen for key press or click to skip instantly
+    document.addEventListener('keydown', handleBootupKey);
+    document.addEventListener('click', handleBootupClick);
 
     // Initialize grid when menu is shown
     initializeGrid();
