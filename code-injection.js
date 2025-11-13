@@ -589,14 +589,11 @@ document.addEventListener('DOMContentLoaded', async function() {
     // Load ambient sound
     await loadAmbientSound();
 
-    // Start ambient sound on first user interaction (required by browser autoplay policy)
-    const startAudioOnInteraction = () => {
+    // Start ambient sound on first click only (required by browser autoplay policy)
+    // Using click only to avoid interfering with gameplay keyboard input
+    document.addEventListener('click', () => {
         startAmbientSound();
-        document.removeEventListener('click', startAudioOnInteraction);
-        document.removeEventListener('keydown', startAudioOnInteraction);
-    };
-    document.addEventListener('click', startAudioOnInteraction);
-    document.addEventListener('keydown', startAudioOnInteraction);
+    }, { once: true });
 
     init();
     addRandomGlitches();
