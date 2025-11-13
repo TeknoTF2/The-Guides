@@ -366,7 +366,7 @@ body {
     }
 }
 
-/* Screen flicker on load */
+/* Screen flicker on load - removed for accessibility */
 @keyframes flicker {
     0% { opacity: 0.1; }
     10% { opacity: 1; }
@@ -378,5 +378,5 @@ body {
 }
 
 body {
-    animation: flicker 2s ease-in-out;
+    /* animation: flicker 2s ease-in-out; */
 }
