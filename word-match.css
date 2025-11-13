@@ -48,7 +48,6 @@ body {
     background: rgba(0, 255, 0, 0.02);
     pointer-events: none;
     z-index: 999;
-    animation: flicker 0.15s infinite;
 }
 
 @keyframes flicker {
