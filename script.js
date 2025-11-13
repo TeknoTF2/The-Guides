@@ -30,13 +30,14 @@ async function loadAmbientSound() {
 
         // Create gain node for volume control
         gainNode = audioContext.createGain();
-        gainNode.gain.value = 0.3; // 30% volume - adjust as needed
+        gainNode.gain.value = 0.5; // Increased volume for PC speakers
         gainNode.connect(audioContext.destination);
 
         // Load the audio file
         const response = await fetch('sounds/crt-hum.mp3');
         const arrayBuffer = await response.arrayBuffer();
         ambientBuffer = await audioContext.decodeAudioData(arrayBuffer);
+        console.log('Ambient sound loaded successfully');
     } catch (error) {
         console.log('Could not load ambient sound:', error);
     }

@@ -10,25 +10,42 @@ async function loadAmbientSound() {
     try {
         audioContext = new (window.AudioContext || window.webkitAudioContext)();
         gainNode = audioContext.createGain();
-        gainNode.gain.value = 0.3;
+        gainNode.gain.value = 0.5; // Increased volume for PC speakers
         gainNode.connect(audioContext.destination);
         const response = await fetch('sounds/crt-hum.mp3');
         const arrayBuffer = await response.arrayBuffer();
         ambientBuffer = await audioContext.decodeAudioData(arrayBuffer);
+        console.log('Ambient sound loaded successfully');
     } catch (error) {
         console.log('Could not load ambient sound:', error);
     }
 }
 
 function startAmbientSound() {
-    if (!audioContext || !ambientBuffer) return;
-    if (audioContext.state === 'suspended') audioContext.resume();
-    if (ambientSource) return;
+    if (!audioContext || !ambientBuffer) {
+        console.log('Audio context or buffer not ready');
+        return;
+    }
+
+    // Resume audio context if suspended
+    if (audioContext.state === 'suspended') {
+        audioContext.resume().then(() => {
+            console.log('Audio context resumed');
+        });
+    }
+
+    // Don't create multiple sources
+    if (ambientSource) {
+        console.log('Audio already playing');
+        return;
+    }
+
     ambientSource = audioContext.createBufferSource();
     ambientSource.buffer = ambientBuffer;
     ambientSource.loop = true;
     ambientSource.connect(gainNode);
     ambientSource.start(0);
+    console.log('Ambient sound started');
 }
 
 // Word lists (same as brute-force.js)

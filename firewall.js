@@ -10,7 +10,7 @@ async function loadAmbientSound() {
     try {
         audioContext = new (window.AudioContext || window.webkitAudioContext)();
         gainNode = audioContext.createGain();
-        gainNode.gain.value = 0.3;
+        gainNode.gain.value = 0.5; // Increased volume for PC speakers
         gainNode.connect(audioContext.destination);
         const response = await fetch('sounds/crt-hum.mp3');
         const arrayBuffer = await response.arrayBuffer();
