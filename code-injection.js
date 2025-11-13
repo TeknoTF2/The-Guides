@@ -213,11 +213,6 @@ function handleKeyPress(e) {
         return;
     }
 
-    if (e.key === 'Enter') {
-        submitInput();
-        return;
-    }
-
     // Handle arrow keys
     if (Object.keys(ARROW_KEYS).includes(e.key)) {
         currentInput += ARROW_KEYS[e.key];
@@ -418,12 +413,20 @@ function animatePrompt(element, prompt) {
             return;
         }
 
+        // Check if prompt was already completed/removed
+        if (!activePrompts.includes(prompt)) {
+            // Prompt was successfully injected, stop animating
+            return;
+        }
+
         const elapsed = Date.now() - startTime;
         const progress = elapsed / duration;
 
         if (progress >= 1) {
-            // Prompt escaped
-            missPrompt(prompt, element);
+            // Prompt escaped - only count as miss if still in active list
+            if (activePrompts.includes(prompt)) {
+                missPrompt(prompt, element);
+            }
             return;
         }
 
@@ -594,14 +597,11 @@ document.addEventListener('DOMContentLoaded', async function() {
     // Load ambient sound
     await loadAmbientSound();
 
-    // Start ambient sound on first user interaction (required by browser autoplay policy)
-    const startAudioOnInteraction = () => {
+    // Start ambient sound on first click only (required by browser autoplay policy)
+    // Using click only to avoid interfering with gameplay keyboard input
+    document.addEventListener('click', () => {
         startAmbientSound();
-        document.removeEventListener('click', startAudioOnInteraction);
-        document.removeEventListener('keydown', startAudioOnInteraction);
-    };
-    document.addEventListener('click', startAudioOnInteraction);
-    document.addEventListener('keydown', startAudioOnInteraction);
+    }, { once: true });
 
     init();
     addRandomGlitches();
