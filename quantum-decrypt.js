@@ -35,12 +35,16 @@ function playAmbientSound() {
 
 // Initialize ambient sound
 loadAmbientSound().then(() => {
-    document.addEventListener('click', () => {
+    const startAudioOnInteraction = () => {
         if (audioContext && audioContext.state === 'suspended') {
             audioContext.resume();
         }
         playAmbientSound();
-    }, { once: true });
+        document.removeEventListener('click', startAudioOnInteraction);
+        document.removeEventListener('keydown', startAudioOnInteraction);
+    };
+    document.addEventListener('click', startAudioOnInteraction);
+    document.addEventListener('keydown', startAudioOnInteraction);
 });
 
 // Game state
