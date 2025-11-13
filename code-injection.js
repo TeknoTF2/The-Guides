@@ -413,12 +413,20 @@ function animatePrompt(element, prompt) {
             return;
         }
 
+        // Check if prompt was already completed/removed
+        if (!activePrompts.includes(prompt)) {
+            // Prompt was successfully injected, stop animating
+            return;
+        }
+
         const elapsed = Date.now() - startTime;
         const progress = elapsed / duration;
 
         if (progress >= 1) {
-            // Prompt escaped
-            missPrompt(prompt, element);
+            // Prompt escaped - only count as miss if still in active list
+            if (activePrompts.includes(prompt)) {
+                missPrompt(prompt, element);
+            }
             return;
         }
 
