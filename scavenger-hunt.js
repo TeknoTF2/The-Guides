@@ -850,9 +850,17 @@ function addRandomGlitches() {
 
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', async function() {
-    // Load and start ambient sound
+    // Load ambient sound
     await loadAmbientSound();
-    startAmbientSound();
+
+    // Start ambient sound on first user interaction (required by browser autoplay policy)
+    const startAudioOnInteraction = () => {
+        startAmbientSound();
+        document.removeEventListener('click', startAudioOnInteraction);
+        document.removeEventListener('keydown', startAudioOnInteraction);
+    };
+    document.addEventListener('click', startAudioOnInteraction);
+    document.addEventListener('keydown', startAudioOnInteraction);
 
     init();
     addRandomGlitches();
