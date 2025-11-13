@@ -213,11 +213,6 @@ function handleKeyPress(e) {
         return;
     }
 
-    if (e.key === 'Enter') {
-        submitInput();
-        return;
-    }
-
     // Handle arrow keys
     if (Object.keys(ARROW_KEYS).includes(e.key)) {
         currentInput += ARROW_KEYS[e.key];
