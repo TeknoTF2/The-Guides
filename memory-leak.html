@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEMORY LEAK // PROTOCOL 03</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="memory-leak.css">
+</head>
+<body>
+    <div class="scanlines"></div>
+    <div class="crt-effect"></div>
+
+    <!-- Back Button -->
+    <a href="index.html" class="back-button" title="Return to Main Menu">
+        <span class="back-arrow">←</span> BACK
+    </a>
+
+    <!-- Game Container -->
+    <div class="game-container">
+        <!-- Terminal Header -->
+        <div class="terminal-header">
+            <div class="header-text">
+                <span class="glitch" data-text="MEMORY LEAK PROTOCOL">MEMORY LEAK PROTOCOL</span>
+            </div>
+            <div class="system-info">
+                PATTERN RECOGNITION SUBROUTINE // NEURAL MAPPING SYSTEM
+            </div>
+        </div>
+
+        <!-- Difficulty Selection Screen -->
+        <div id="difficulty-screen" class="screen active">
+            <div class="screen-title">
+                <span class="bracket">[</span> SELECT SECURITY LEVEL <span class="bracket">]</span>
+            </div>
+
+            <div class="difficulty-container">
+                <div class="difficulty-option" data-difficulty="low">
+                    <div class="difficulty-level">LOW SECURITY</div>
+                    <div class="difficulty-specs">
+                        <div class="spec-line">GRID SIZE: 3x3</div>
+                        <div class="spec-line">PATTERN NODES: 4-6</div>
+                        <div class="spec-line">DISPLAY TIME: 3 SEC</div>
+                        <div class="spec-line">THREAT LEVEL: MINIMAL</div>
+                    </div>
+                    <div class="difficulty-status">[READY]</div>
+                </div>
+
+                <div class="difficulty-option" data-difficulty="standard">
+                    <div class="difficulty-level">STANDARD SECURITY</div>
+                    <div class="difficulty-specs">
+                        <div class="spec-line">GRID SIZE: 5x5</div>
+                        <div class="spec-line">PATTERN NODES: 6-12</div>
+                        <div class="spec-line">DISPLAY TIME: 6 SEC</div>
+                        <div class="spec-line">THREAT LEVEL: MODERATE</div>
+                    </div>
+                    <div class="difficulty-status">[READY]</div>
+                </div>
+
+                <div class="difficulty-option" data-difficulty="high">
+                    <div class="difficulty-level">HIGH SECURITY</div>
+                    <div class="difficulty-specs">
+                        <div class="spec-line">GRID SIZE: 7x7</div>
+                        <div class="spec-line">PATTERN NODES: 13-20</div>
+                        <div class="spec-line">DISPLAY TIME: 10 SEC</div>
+                        <div class="spec-line">THREAT LEVEL: EXTREME</div>
+                    </div>
+                    <div class="difficulty-status">[READY]</div>
+                </div>
+            </div>
+
+            <div class="screen-footer">
+                <span class="footer-prompt">&gt;</span>
+                <span class="footer-text">SELECT DIFFICULTY TO INITIALIZE PROTOCOL</span>
+                <span class="cursor-blink">_</span>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="game-screen" class="screen">
+            <div class="game-info">
+                <div class="info-line">
+                    <span class="info-label">SECURITY LEVEL:</span>
+                    <span id="current-difficulty" class="info-value">---</span>
+                </div>
+                <div class="info-line">
+                    <span class="info-label">GRID SIZE:</span>
+                    <span id="grid-size" class="info-value">---</span>
+                </div>
+                <div class="info-line">
+                    <span class="info-label">STATUS:</span>
+                    <span id="game-status" class="info-value">AWAITING INJECTION</span>
+                </div>
+            </div>
+
+            <!-- Game Grid -->
+            <div id="game-grid" class="game-grid"></div>
+
+            <!-- Control Panel -->
+            <div class="control-panel">
+                <button id="inject-btn" class="game-button inject-btn">
+                    <span class="button-icon">&gt;&gt;</span>
+                    INJECT
+                    <span class="button-icon">&lt;&lt;</span>
+                </button>
+
+                <button id="reset-btn" class="game-button reset-btn hidden">
+                    <span class="button-icon">↻</span>
+                    RESET PROTOCOL
+                </button>
+            </div>
+
+            <!-- Message Display -->
+            <div id="message-display" class="message-display"></div>
+        </div>
+    </div>
+
+    <script src="memory-leak.js"></script>
+</body>
+</html>

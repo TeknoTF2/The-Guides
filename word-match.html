@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WORD_MATCH.EXE - Terminal Hacking Games</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="word-match.css">
+</head>
+<body>
+    <div class="terminal-container">
+        <div class="scanlines"></div>
+        <div class="crt-flicker"></div>
+
+        <!-- Header -->
+        <div class="terminal-header">
+            <div class="header-text">&gt; WORD_MATCH.EXE</div>
+            <div class="header-subtitle">PATTERN RECOGNITION MODULE v1.7</div>
+        </div>
+
+        <!-- Difficulty Selection Screen -->
+        <div id="difficulty-screen" class="screen active">
+            <div class="screen-title">SELECT SCAN DEPTH</div>
+            <div class="difficulty-options">
+                <div class="difficulty-option" data-difficulty="low" tabindex="0">
+                    <div class="difficulty-name">[1] SHALLOW SCAN</div>
+                    <div class="difficulty-desc">Basic pattern recognition</div>
+                    <div class="difficulty-stats">Words: 3 // Time: 60s</div>
+                </div>
+                <div class="difficulty-option" data-difficulty="standard" tabindex="0">
+                    <div class="difficulty-name">[2] STANDARD SCAN</div>
+                    <div class="difficulty-desc">Moderate analysis required</div>
+                    <div class="difficulty-stats">Words: 5 // Time: 90s</div>
+                </div>
+                <div class="difficulty-option" data-difficulty="high" tabindex="0">
+                    <div class="difficulty-name">[3] DEEP SCAN</div>
+                    <div class="difficulty-desc">Advanced pattern matching</div>
+                    <div class="difficulty-stats">Words: 7 // Time: 120s</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="game-screen" class="screen">
+            <!-- HUD -->
+            <div class="game-hud">
+                <div class="hud-item">
+                    <span class="hud-label">SCAN MODE:</span>
+                    <span class="hud-value" id="current-difficulty">SHALLOW</span>
+                </div>
+                <div class="hud-item">
+                    <span class="hud-label">TIMER:</span>
+                    <span class="hud-value" id="timer-display">60</span>
+                </div>
+                <div class="hud-item">
+                    <span class="hud-label">FOUND:</span>
+                    <span class="hud-value" id="found-display">0 / 3</span>
+                </div>
+            </div>
+
+            <!-- Scrolling text container -->
+            <div class="scroll-container" id="scroll-container">
+                <div class="scroll-content" id="scroll-content"></div>
+            </div>
+
+            <!-- Words to find -->
+            <div class="word-list-container">
+                <div class="word-list-title">TARGET PATTERNS:</div>
+                <div class="word-list" id="word-list"></div>
+            </div>
+
+            <!-- Controls -->
+            <div class="game-controls">
+                <button id="start-btn" class="game-btn">START SCAN</button>
+                <button id="restart-btn" class="game-btn hidden">RESTART</button>
+            </div>
+
+            <!-- Message Display -->
+            <div class="message-display" id="message-display"></div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="results-screen" class="screen">
+            <div class="results-container">
+                <div class="results-status" id="results-status">SCAN COMPLETE</div>
+                <div class="results-score" id="results-score">3 / 3 PATTERNS FOUND</div>
+                <div class="results-message" id="results-message"></div>
+            </div>
+            <div class="results-controls">
+                <button id="retry-btn" class="game-btn">TRY AGAIN</button>
+                <button id="menu-btn" class="game-btn">RETURN TO MENU</button>
+            </div>
+        </div>
+
+        <!-- Back to Menu Button -->
+        <div class="back-button">
+            <button id="back-btn" class="game-btn back-btn">&lt; MAIN MENU</button>
+        </div>
+    </div>
+
+    <script src="word-match.js"></script>
+</body>
+</html>

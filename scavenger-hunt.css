@@ -1,0 +1,461 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Share Tech Mono', monospace;
+    background-color: #000;
+    color: #00ff00;
+    overflow: hidden;
+    height: 100vh;
+}
+
+.terminal-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    padding: 20px;
+    background-color: #000;
+    overflow-y: auto;
+}
+
+/* CRT Effects */
+.scanlines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.1),
+        rgba(0, 0, 0, 0.1) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+    pointer-events: none;
+    z-index: 1000;
+}
+
+.crt-flicker {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 255, 0, 0.02);
+    pointer-events: none;
+    z-index: 999;
+    animation: flicker 0.15s infinite;
+}
+
+@keyframes flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.95; }
+}
+
+/* Header */
+.terminal-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 20px;
+    border: 2px solid #00ff00;
+    border-radius: 5px;
+    background: rgba(0, 255, 0, 0.05);
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+}
+
+.header-text {
+    font-size: 28px;
+    font-weight: bold;
+    text-shadow: 0 0 10px #00ff00;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.header-subtitle {
+    font-size: 14px;
+    opacity: 0.7;
+    letter-spacing: 1px;
+}
+
+/* Screen Management */
+.screen {
+    display: none;
+    animation: fadeIn 0.5s;
+}
+
+.screen.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Difficulty Selection */
+.screen-title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px #00ff00;
+    letter-spacing: 2px;
+}
+
+.scenario-subtitle {
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 30px;
+    opacity: 0.7;
+    letter-spacing: 1px;
+}
+
+.back-to-difficulty {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.difficulty-options {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.difficulty-option,
+.scenario-option {
+    padding: 20px;
+    border: 2px solid #00ff00;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    background: rgba(0, 255, 0, 0.05);
+}
+
+.difficulty-option:hover,
+.difficulty-option:focus,
+.scenario-option:hover,
+.scenario-option:focus {
+    background: rgba(0, 255, 0, 0.15);
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+    transform: scale(1.02);
+    outline: none;
+}
+
+.difficulty-name,
+.scenario-name {
+    font-size: 20px;
+    margin-bottom: 10px;
+    text-shadow: 0 0 5px #00ff00;
+}
+
+.difficulty-desc,
+.scenario-desc {
+    font-size: 14px;
+    opacity: 0.8;
+    margin-bottom: 10px;
+}
+
+.difficulty-stats {
+    font-size: 12px;
+    opacity: 0.6;
+}
+
+/* Document Screen */
+.document-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.document-type {
+    font-size: 20px;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px #00ff00;
+    letter-spacing: 2px;
+}
+
+.document-warning {
+    font-size: 14px;
+    color: #ffff00;
+    text-shadow: 0 0 10px #ffff00;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.document-container {
+    max-width: 800px;
+    margin: 0 auto 30px;
+    padding: 30px;
+    border: 2px solid #00ff00;
+    border-radius: 5px;
+    background: rgba(0, 255, 0, 0.05);
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.document-content {
+    font-size: 16px;
+    line-height: 1.8;
+    white-space: pre-wrap;
+}
+
+.document-footer {
+    text-align: center;
+}
+
+/* Questions Screen */
+.questions-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.questions-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px #00ff00;
+    letter-spacing: 2px;
+}
+
+.questions-progress {
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+.question-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.question-text {
+    font-size: 18px;
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 2px solid #00ff00;
+    border-radius: 5px;
+    background: rgba(0, 255, 0, 0.05);
+    text-shadow: 0 0 5px #00ff00;
+}
+
+.question-options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.question-option {
+    padding: 15px;
+    border: 2px solid #00ff00;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    background: rgba(0, 255, 0, 0.05);
+    font-size: 16px;
+}
+
+.question-option:hover {
+    background: rgba(0, 255, 0, 0.15);
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.4);
+    transform: translateX(5px);
+}
+
+.question-option.selected {
+    background: rgba(0, 255, 0, 0.2);
+    border-color: #ffff00;
+    box-shadow: 0 0 20px rgba(255, 255, 0, 0.5);
+}
+
+.question-option.correct {
+    background: rgba(0, 255, 0, 0.3);
+    border-color: #00ff00;
+    animation: correctFlash 0.5s;
+}
+
+.question-option.incorrect {
+    background: rgba(255, 0, 0, 0.3);
+    border-color: #ff0000;
+    color: #ff0000;
+    animation: shake 0.5s;
+}
+
+@keyframes correctFlash {
+    0%, 100% { box-shadow: 0 0 20px rgba(0, 255, 0, 0.5); }
+    50% { box-shadow: 0 0 40px rgba(0, 255, 0, 0.8); }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+/* Results Screen */
+.results-container {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.results-status {
+    font-size: 32px;
+    margin-bottom: 20px;
+    text-shadow: 0 0 20px currentColor;
+    letter-spacing: 3px;
+}
+
+.results-status.success {
+    color: #00ff00;
+}
+
+.results-status.failure {
+    color: #ff0000;
+}
+
+.results-score {
+    font-size: 24px;
+    margin-bottom: 20px;
+    opacity: 0.9;
+}
+
+.results-message {
+    font-size: 16px;
+    opacity: 0.8;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 2px solid #00ff00;
+    border-radius: 5px;
+    background: rgba(0, 255, 0, 0.05);
+}
+
+.results-controls {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Buttons */
+.game-btn {
+    padding: 15px 30px;
+    background: transparent;
+    color: #00ff00;
+    border: 2px solid #00ff00;
+    border-radius: 5px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-shadow: 0 0 5px #00ff00;
+}
+
+.game-btn:hover {
+    background: rgba(0, 255, 0, 0.2);
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+    transform: scale(1.05);
+}
+
+.game-btn:active {
+    transform: scale(0.95);
+}
+
+.game-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Back Button */
+.back-button {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 100;
+}
+
+.back-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+}
+
+/* Message Display */
+.message-display {
+    text-align: center;
+    margin-top: 30px;
+    min-height: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.message-text {
+    font-size: 18px;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px currentColor;
+}
+
+.message-text.success {
+    color: #00ff00;
+    animation: correctFlash 0.5s;
+}
+
+.message-text.failure {
+    color: #ff0000;
+    animation: shake 0.5s;
+}
+
+.message-subtext {
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+/* Scrollbar Styling */
+.document-container::-webkit-scrollbar,
+.terminal-container::-webkit-scrollbar {
+    width: 10px;
+}
+
+.document-container::-webkit-scrollbar-track,
+.terminal-container::-webkit-scrollbar-track {
+    background: rgba(0, 255, 0, 0.1);
+}
+
+.document-container::-webkit-scrollbar-thumb,
+.terminal-container::-webkit-scrollbar-thumb {
+    background: rgba(0, 255, 0, 0.5);
+    border-radius: 5px;
+}
+
+.document-container::-webkit-scrollbar-thumb:hover,
+.terminal-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 255, 0, 0.7);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .terminal-container {
+        padding: 10px;
+    }
+
+    .header-text {
+        font-size: 20px;
+    }
+
+    .screen-title,
+    .questions-title {
+        font-size: 18px;
+    }
+
+    .document-container {
+        padding: 15px;
+    }
+
+    .results-controls {
+        flex-direction: column;
+    }
+}

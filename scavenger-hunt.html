@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCAVENGER_HUNT.EXE - Terminal Hacking Games</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="scavenger-hunt.css">
+</head>
+<body>
+    <div class="terminal-container">
+        <div class="scanlines"></div>
+        <div class="crt-flicker"></div>
+
+        <!-- Header -->
+        <div class="terminal-header">
+            <div class="header-text">&gt; SCAVENGER_HUNT.EXE</div>
+            <div class="header-subtitle">SOCIAL ENGINEERING MODULE v2.4</div>
+        </div>
+
+        <!-- Difficulty Selection Screen -->
+        <div id="difficulty-screen" class="screen active">
+            <div class="screen-title">SELECT INTEL COMPLEXITY</div>
+            <div class="difficulty-options">
+                <div class="difficulty-option" data-difficulty="low" tabindex="0">
+                    <div class="difficulty-name">[1] LOW SECURITY</div>
+                    <div class="difficulty-desc">Direct information // Obvious answers</div>
+                    <div class="difficulty-stats">Questions: 3</div>
+                </div>
+                <div class="difficulty-option" data-difficulty="standard" tabindex="0">
+                    <div class="difficulty-name">[2] STANDARD SECURITY</div>
+                    <div class="difficulty-desc">Logic required // Inference needed</div>
+                    <div class="difficulty-stats">Questions: 4</div>
+                </div>
+                <div class="difficulty-option" data-difficulty="high" tabindex="0">
+                    <div class="difficulty-name">[3] HIGH SECURITY</div>
+                    <div class="difficulty-desc">Limited intel // Deduction critical</div>
+                    <div class="difficulty-stats">Questions: 5</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scenario Selection Screen -->
+        <div id="scenario-screen" class="screen">
+            <div class="screen-title">SELECT TARGET</div>
+            <div class="scenario-subtitle" id="scenario-subtitle">LOW SECURITY</div>
+            <div class="difficulty-options">
+                <div class="scenario-option" data-scenario="0" tabindex="0">
+                    <div class="scenario-name">[1] SCENARIO 1</div>
+                    <div class="scenario-desc" id="scenario-desc-0">Loading...</div>
+                </div>
+                <div class="scenario-option" data-scenario="1" tabindex="0">
+                    <div class="scenario-name">[2] SCENARIO 2</div>
+                    <div class="scenario-desc" id="scenario-desc-1">Loading...</div>
+                </div>
+                <div class="scenario-option" data-scenario="2" tabindex="0">
+                    <div class="scenario-name">[3] SCENARIO 3</div>
+                    <div class="scenario-desc" id="scenario-desc-2">Loading...</div>
+                </div>
+            </div>
+            <div class="back-to-difficulty">
+                <button id="back-to-difficulty-btn" class="game-btn">&lt; CHANGE DIFFICULTY</button>
+            </div>
+        </div>
+
+        <!-- Document Screen -->
+        <div id="document-screen" class="screen">
+            <div class="document-header">
+                <div class="document-type" id="document-type">INTERCEPTED COMMUNICATION</div>
+                <div class="document-warning">[MEMORIZE KEY INFORMATION]</div>
+            </div>
+            <div class="document-container">
+                <div class="document-content" id="document-content">
+                    <!-- Document text will be inserted here -->
+                </div>
+            </div>
+            <div class="document-footer">
+                <button id="proceed-btn" class="game-btn">PROCEED TO QUESTIONS &gt;</button>
+            </div>
+        </div>
+
+        <!-- Questions Screen -->
+        <div id="questions-screen" class="screen">
+            <div class="questions-header">
+                <div class="questions-title">SECURITY VERIFICATION</div>
+                <div class="questions-progress" id="questions-progress">QUESTION 1 / 3</div>
+            </div>
+            <div class="question-container" id="question-container">
+                <div class="question-text" id="question-text"></div>
+                <div class="question-options" id="question-options">
+                    <!-- Options will be inserted here -->
+                </div>
+            </div>
+            <div class="questions-footer">
+                <div class="message-display" id="message-display"></div>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="results-screen" class="screen">
+            <div class="results-container">
+                <div class="results-status" id="results-status">ACCESS GRANTED</div>
+                <div class="results-score" id="results-score">3 / 3 CORRECT</div>
+                <div class="results-message" id="results-message"></div>
+            </div>
+            <div class="results-controls">
+                <button id="retry-btn" class="game-btn">TRY AGAIN</button>
+                <button id="menu-btn" class="game-btn">RETURN TO MENU</button>
+            </div>
+        </div>
+
+        <!-- Back to Menu Button (always visible) -->
+        <div class="back-button">
+            <button id="back-btn" class="game-btn back-btn">&lt; MAIN MENU</button>
+        </div>
+    </div>
+
+    <script src="scavenger-hunt.js"></script>
+</body>
+</html>

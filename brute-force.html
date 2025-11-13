@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRUTE FORCE // PROTOCOL 02</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="brute-force.css">
+</head>
+<body>
+    <div class="scanlines"></div>
+    <div class="crt-effect"></div>
+
+    <!-- Back Button -->
+    <a href="index.html" class="back-button" title="Return to Main Menu">
+        <span class="back-arrow">←</span> BACK
+    </a>
+
+    <!-- Game Container -->
+    <div class="game-container">
+        <!-- Terminal Header -->
+        <div class="terminal-header">
+            <div class="header-text">
+                <span class="glitch" data-text="BRUTE FORCE PROTOCOL">BRUTE FORCE PROTOCOL</span>
+            </div>
+            <div class="system-info">
+                PASSWORD DECRYPTION // SEQUENTIAL CHARACTER ANALYSIS
+            </div>
+        </div>
+
+        <!-- Difficulty Selection Screen -->
+        <div id="difficulty-screen" class="screen active">
+            <div class="screen-title">
+                <span class="bracket">[</span> SELECT DECRYPTION MODE <span class="bracket">]</span>
+            </div>
+
+            <div class="difficulty-container">
+                <div class="difficulty-option" data-difficulty="low">
+                    <div class="difficulty-level">BASIC ENCRYPTION</div>
+                    <div class="difficulty-specs">
+                        <div class="spec-line">PASSWORD LENGTH: 4-6 CHARS</div>
+                        <div class="spec-line">WORD POOL: 300 COMMON</div>
+                        <div class="spec-line">CHARACTER ATTEMPTS: 10</div>
+                        <div class="spec-line">THREAT LEVEL: MINIMAL</div>
+                    </div>
+                    <div class="difficulty-status">[READY]</div>
+                </div>
+
+                <div class="difficulty-option" data-difficulty="standard">
+                    <div class="difficulty-level">STANDARD ENCRYPTION</div>
+                    <div class="difficulty-specs">
+                        <div class="spec-line">PASSWORD LENGTH: 6-8 CHARS</div>
+                        <div class="spec-line">WORD POOL: 500 MIXED</div>
+                        <div class="spec-line">CHARACTER ATTEMPTS: 8</div>
+                        <div class="spec-line">THREAT LEVEL: MODERATE</div>
+                    </div>
+                    <div class="difficulty-status">[READY]</div>
+                </div>
+
+                <div class="difficulty-option" data-difficulty="high">
+                    <div class="difficulty-level">ADVANCED ENCRYPTION</div>
+                    <div class="difficulty-specs">
+                        <div class="spec-line">PASSWORD LENGTH: 8-10 CHARS</div>
+                        <div class="spec-line">WORD POOL: 800 COMPLEX</div>
+                        <div class="spec-line">CHARACTER ATTEMPTS: 6</div>
+                        <div class="spec-line">THREAT LEVEL: EXTREME</div>
+                    </div>
+                    <div class="difficulty-status">[READY]</div>
+                </div>
+            </div>
+
+            <div class="screen-footer">
+                <span class="footer-prompt">&gt;</span>
+                <span class="footer-text">SELECT ENCRYPTION MODE TO BEGIN DECRYPTION</span>
+                <span class="cursor-blink">_</span>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="game-screen" class="screen">
+            <div class="game-hud">
+                <div class="hud-section">
+                    <div class="hud-label">ENCRYPTION:</div>
+                    <div id="current-difficulty" class="hud-value">---</div>
+                </div>
+                <div class="hud-section">
+                    <div class="hud-label">ATTEMPTS LEFT:</div>
+                    <div id="attempts-left" class="hud-value hud-attempts">0</div>
+                </div>
+                <div class="hud-section">
+                    <div class="hud-label">LENGTH:</div>
+                    <div id="word-length" class="hud-value">0</div>
+                </div>
+                <div class="hud-section">
+                    <div class="hud-label">STATUS:</div>
+                    <div id="game-status" class="hud-value">STANDBY</div>
+                </div>
+            </div>
+
+            <!-- Password Display -->
+            <div class="password-container">
+                <div class="password-label">[ ENCRYPTED PASSWORD ]</div>
+                <div id="password-display" class="password-display"></div>
+            </div>
+
+            <!-- Used Letters -->
+            <div class="used-letters-container">
+                <div class="used-label">TESTED CHARACTERS:</div>
+                <div id="used-letters" class="used-letters"></div>
+            </div>
+
+            <!-- Keyboard -->
+            <div class="keyboard-container">
+                <div class="keyboard-label">[ CHARACTER INPUT ]</div>
+                <div id="keyboard" class="keyboard">
+                    <!-- Letters will be generated here -->
+                </div>
+            </div>
+
+            <!-- Final Guess Input -->
+            <div id="final-guess-container" class="final-guess-container hidden">
+                <div class="final-guess-label">[ FINAL PASSWORD ATTEMPT ]</div>
+                <input type="text" id="final-guess-input" class="final-guess-input" placeholder="ENTER COMPLETE PASSWORD" maxlength="20">
+                <div class="final-guess-hint">Press ENTER to submit</div>
+            </div>
+
+            <!-- Control Panel -->
+            <div class="control-panel">
+                <button id="start-btn" class="game-button start-btn">
+                    <span class="button-icon">&gt;&gt;</span>
+                    START DECRYPTION
+                    <span class="button-icon">&lt;&lt;</span>
+                </button>
+
+                <button id="guess-word-btn" class="game-button guess-word-btn hidden">
+                    <span class="button-icon">📝</span>
+                    GUESS PASSWORD
+                </button>
+
+                <button id="restart-btn" class="game-button restart-btn hidden">
+                    <span class="button-icon">↻</span>
+                    RESTART
+                </button>
+            </div>
+
+            <!-- Instructions -->
+            <div class="instructions">
+                <div class="instruction-title">[ PROTOCOL ]</div>
+                <div class="instruction-text">
+                    <div class="instruction-line">1. SELECT CHARACTERS to test against encrypted password</div>
+                    <div class="instruction-line">2. REVEALED characters appear in password display</div>
+                    <div class="instruction-line">3. INCORRECT characters reduce remaining attempts</div>
+                    <div class="instruction-line">4. When ready, GUESS THE COMPLETE PASSWORD</div>
+                </div>
+            </div>
+
+            <!-- Message Display -->
+            <div id="message-display" class="message-display"></div>
+        </div>
+    </div>
+
+    <script src="brute-force.js"></script>
+</body>
+</html>
